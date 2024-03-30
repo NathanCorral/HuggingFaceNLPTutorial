@@ -1,0 +1,186 @@
+=========================
+Subsection:  ax
+[0000] Label: [1mcontradiction[0m
+  -premise: The cat sat on the mat.
+  -hypothesis: The cat did not sit on the mat.
+[0001] Label: [1mcontradiction[0m
+  -premise: The cat did not sit on the mat.
+  -hypothesis: The cat sat on the mat.
+[0002] Label: [1mcontradiction[0m
+  -premise: When you've got no snow, it's really hard to learn a snow sport so we looked at all the different ways I could mimic being on snow without actually being on snow.
+  -hypothesis: When you've got snow, it's really hard to learn a snow sport so we looked at all the different ways I could mimic being on snow without actually being on snow.
+
+
+{'input_ids': torch.Size([8, 78]), 'token_type_ids': torch.Size([8, 78]), 'attention_mask': torch.Size([8, 78]), 'labels': torch.Size([8])}
+
+
+=========================
+Subsection:  cola
+[0000] Label: [1macceptable[0m
+  -sentence: Our friends won't buy this analysis, let alone the next one we propose.
+[0001] Label: [1macceptable[0m
+  -sentence: One more pseudo generalization and I'm giving up.
+[0002] Label: [1macceptable[0m
+  -sentence: One more pseudo generalization or I'm giving up.
+
+
+{'input_ids': torch.Size([8, 19]), 'token_type_ids': torch.Size([8, 19]), 'attention_mask': torch.Size([8, 19]), 'labels': torch.Size([8])}
+
+
+=========================
+Subsection:  mnli
+[0000] Label: [1mneutral[0m
+  -premise: Conceptually cream skimming has two basic dimensions - product and geography.
+  -hypothesis: Product and geography are what make cream skimming work. 
+[0001] Label: [1mentailment[0m
+  -premise: you know during the season and i guess at at your level uh you lose them to the next level if if they decide to recall the the parent team the Braves decide to call to recall a guy from triple A then a double A guy goes up to replace him and a single A guy goes up to replace him
+  -hypothesis: You lose the things to the following level if the people recall.
+[0002] Label: [1mentailment[0m
+  -premise: One of our number will carry out your instructions minutely.
+  -hypothesis: A member of my team will execute your orders with immense precision.
+
+
+{'input_ids': torch.Size([8, 78]), 'token_type_ids': torch.Size([8, 78]), 'attention_mask': torch.Size([8, 78]), 'labels': torch.Size([8])}
+
+
+=========================
+Subsection:  mnli_matched
+[0000] Label: [1mneutral[0m
+  -premise: The new rights are nice enough
+  -hypothesis: Everyone really likes the newest benefits 
+[0001] Label: [1mcontradiction[0m
+  -premise: This site includes a list of all award winners and a searchable database of Government Executive articles.
+  -hypothesis: The Government Executive articles housed on the website are not able to be searched.
+[0002] Label: [1mentailment[0m
+  -premise: uh i don't know i i have mixed emotions about him uh sometimes i like him but at the same times i love to see somebody beat him
+  -hypothesis: I like him for the most part, but would still enjoy seeing someone beat him.
+
+
+{'input_ids': torch.Size([8, 70]), 'token_type_ids': torch.Size([8, 70]), 'attention_mask': torch.Size([8, 70]), 'labels': torch.Size([8])}
+
+
+=========================
+Subsection:  mnli_mismatched
+[0000] Label: [1mcontradiction[0m
+  -premise: Your contribution helped make it possible for us to provide our students with a quality education.
+  -hypothesis: Your contributions were of no help with our students' education.
+[0001] Label: [1mcontradiction[0m
+  -premise: The answer has nothing to do with their cause, however, but with the simple fact that dictionaries are not exercises in bi-unique substitutability; in other words, if one of the senses of run is `operate' (as in She runs an engine factory ), that does not make it valid to assume that one can substitute operate for run in We run in the marathon every year .  Although recognizing this as a shortcoming of dictionaries and assigning it arbitrarily to what, for lack of a better term, we might call the  genius  of the language, might seem trivial to the casual observer, it is a valid matter for concern in the realm of lexicology.
+  -hypothesis: Dictionaries are indeed exercises in bi-unique substitutability.
+[0002] Label: [1mentailment[0m
+  -premise:  We serve a classic Tuscan meal that includes a Florentine terrine made with dick and chicken livers.
+  -hypothesis: We serve a meal of Florentine terrine.
+
+
+{'input_ids': torch.Size([8, 162]), 'token_type_ids': torch.Size([8, 162]), 'attention_mask': torch.Size([8, 162]), 'labels': torch.Size([8])}
+
+
+=========================
+Subsection:  mrpc
+[0000] Label: [1mequivalent[0m
+  -sentence1: Amrozi accused his brother , whom he called " the witness " , of deliberately distorting his evidence .
+  -sentence2: Referring to him as only " the witness " , Amrozi accused his brother of deliberately distorting his evidence .
+[0001] Label: [1mnot_equivalent[0m
+  -sentence1: Yucaipa owned Dominick 's before selling the chain to Safeway in 1998 for $ 2.5 billion .
+  -sentence2: Yucaipa bought Dominick 's in 1995 for $ 693 million and sold it to Safeway for $ 1.8 billion in 1998 .
+[0002] Label: [1mequivalent[0m
+  -sentence1: They had published an advertisement on the Internet on June 10 , offering the cargo for sale , he added .
+  -sentence2: On June 10 , the ship 's owners had published an advertisement on the Internet , offering the explosives for sale .
+
+
+{'input_ids': torch.Size([8, 67]), 'token_type_ids': torch.Size([8, 67]), 'attention_mask': torch.Size([8, 67]), 'labels': torch.Size([8])}
+
+
+=========================
+Subsection:  qnli
+[0000] Label: [1mnot_entailment[0m
+  -question: When did the third Digimon series begin?
+  -sentence: Unlike the two seasons before it and most of the seasons that followed, Digimon Tamers takes a darker and more realistic approach to its story featuring Digimon who do not reincarnate after their deaths and more complex character development in the original Japanese.
+[0001] Label: [1mnot_entailment[0m
+  -question: Which missile batteries often have individual launchers several kilometres from one another?
+  -sentence: When MANPADS is operated by specialists, batteries may have several dozen teams deploying separately in small sections; self-propelled air defence guns may deploy in pairs.
+[0002] Label: [1mentailment[0m
+  -question: What two things does Popper argue Tarski's theory involves in an evaluation of truth?
+  -sentence: He bases this interpretation on the fact that examples such as the one described above refer to two things: assertions and the facts to which they refer.
+
+
+{'input_ids': torch.Size([8, 73]), 'token_type_ids': torch.Size([8, 73]), 'attention_mask': torch.Size([8, 73]), 'labels': torch.Size([8])}
+
+
+=========================
+Subsection:  qqp
+[0000] Label: [1mnot_duplicate[0m
+  -question1: How is the life of a math student? Could you describe your own experiences?
+  -question2: Which level of prepration is enough for the exam jlpt5?
+[0001] Label: [1mduplicate[0m
+  -question1: How do I control my horny emotions?
+  -question2: How do you control your horniness?
+[0002] Label: [1mnot_duplicate[0m
+  -question1: What causes stool color to change to yellow?
+  -question2: What can cause stool to come out as little balls?
+
+
+{'input_ids': torch.Size([8, 67]), 'token_type_ids': torch.Size([8, 67]), 'attention_mask': torch.Size([8, 67]), 'labels': torch.Size([8])}
+
+
+=========================
+Subsection:  rte
+[0000] Label: [1mnot_entailment[0m
+  -sentence1: No Weapons of Mass Destruction Found in Iraq Yet.
+  -sentence2: Weapons of Mass Destruction Found in Iraq.
+[0001] Label: [1mentailment[0m
+  -sentence1: A place of sorrow, after Pope John Paul II died, became a place of celebration, as Roman Catholic faithful gathered in downtown Chicago to mark the installation of new Pope Benedict XVI.
+  -sentence2: Pope Benedict XVI is the new leader of the Roman Catholic Church.
+[0002] Label: [1mentailment[0m
+  -sentence1: Herceptin was already approved to treat the sickest breast cancer patients, and the company said, Monday, it will discuss with federal regulators the possibility of prescribing the drug for more breast cancer patients.
+  -sentence2: Herceptin can be used to treat breast cancer.
+
+
+{'input_ids': torch.Size([8, 108]), 'token_type_ids': torch.Size([8, 108]), 'attention_mask': torch.Size([8, 108]), 'labels': torch.Size([8])}
+
+
+=========================
+Subsection:  sst2
+[0000] Label: [1mnegative[0m
+  -sentence: hide new secretions from the parental units 
+[0001] Label: [1mnegative[0m
+  -sentence: contains no wit , only labored gags 
+[0002] Label: [1mpositive[0m
+  -sentence: that loves its characters and communicates something rather beautiful about human nature 
+
+
+{'input_ids': torch.Size([8, 29]), 'token_type_ids': torch.Size([8, 29]), 'attention_mask': torch.Size([8, 29]), 'labels': torch.Size([8])}
+
+
+=========================
+Subsection:  stsb
+[0000] Label: [1m5.0[0m
+  -sentence1: A plane is taking off.
+  -sentence2: An air plane is taking off.
+[0001] Label: [1m3.799999952316284[0m
+  -sentence1: A man is playing a large flute.
+  -sentence2: A man is playing a flute.
+[0002] Label: [1m3.799999952316284[0m
+  -sentence1: A man is spreading shreded cheese on a pizza.
+  -sentence2: A man is spreading shredded cheese on an uncooked pizza.
+
+
+{'input_ids': torch.Size([8, 28]), 'token_type_ids': torch.Size([8, 28]), 'attention_mask': torch.Size([8, 28]), 'labels': torch.Size([8])}
+
+
+=========================
+Subsection:  wnli
+[0000] Label: [1mentailment[0m
+  -sentence1: I stuck a pin through a carrot. When I pulled the pin out, it had a hole.
+  -sentence2: The carrot had a hole.
+[0001] Label: [1mentailment[0m
+  -sentence1: John couldn't see the stage with Billy in front of him because he is so short.
+  -sentence2: John is so short.
+[0002] Label: [1mentailment[0m
+  -sentence1: The police arrested all of the gang members. They were trying to stop the drug trade in the neighborhood.
+  -sentence2: The police were trying to stop the drug trade in the neighborhood.
+
+
+{'input_ids': torch.Size([8, 52]), 'token_type_ids': torch.Size([8, 52]), 'attention_mask': torch.Size([8, 52]), 'labels': torch.Size([8])}
+
+
