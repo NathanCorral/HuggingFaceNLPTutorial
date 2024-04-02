@@ -65,15 +65,15 @@ def print_data(raw_datasets, glue_subsection=None):
 		label_lookup = ex_dataset.features["label"].names
 	else:
 		# The "stsb" subsection only has a float as a label.  No label names  
-		#	Just use label value as label.
-
-		# Create a class which is an empty dict
-		#	Whenever we try to look up a "labal"'s name, it returns just the label
-		#	ex. print(label_lookup[2]) -> 2
-		#	ex. print(label_lookup[2.34324]) -> 2.34324
-		# We only need this for glue "stsb" subsection, which characterizes the similarity of
-		#	sentences with a float in [0, 5]
 		class CustomDict(dict):
+			"""
+			Create a class which is an empty dict
+			Whenever we try to look up a "labal"'s name, it returns just the label
+				ex. print(label_lookup[2]) -> 2
+				ex. print(label_lookup[2.34324]) -> 2.34324
+			We only need this for glue "stsb" subsection, which characterizes the similarity of
+				sentences with a float in [0, 5]
+			"""
 			def __missing__(self, key):
 				return key
 		label_lookup = CustomDict()
@@ -93,10 +93,11 @@ def print_data(raw_datasets, glue_subsection=None):
 	print("\n")
 
 
-def pre_process_glue(raw_datasets, subsection="sst2"):
+def pre_process_glue(raw_datasets, subsection="sst2", debug_print=False):
 	assert subsection in glue_subsections
 
-	print_data(raw_datasets, glue_subsection=subsection)
+	if debug_print:
+		print_data(raw_datasets, glue_subsection=subsection)
 
 	def tokenize_funcion(example):
 		example_sentences = [example[key] for key in glue_subsections_string_keys[subsection]]
@@ -112,18 +113,16 @@ def pre_process_glue(raw_datasets, subsection="sst2"):
 
 if __name__ == "__main__":
 	############################################
-	# Part 1
+	# Part 2
 	############################################
 	for subsection in glue_subsections:
 		print("="*25)
 		print(f"Subsection:  {subsection}")
 
 		raw_datasets = load_dataset("glue", subsection)
-
 		# Add tokenize and collate functions
 		tokenized_datasets, data_collator = pre_process_glue(raw_datasets, subsection=subsection)
 		
-
 
 		# Example Batch that can be passed to model:
 		ex_split = list(raw_datasets.keys())[0]
