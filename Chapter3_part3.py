@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # Part 3:  https://huggingface.co/learn/nlp-course/en/chapter3/3?fw=pt
 import numpy as np
+import os
 
 # Previous work
 from datasets import load_dataset
@@ -13,8 +14,9 @@ from transformers import AutoModelForSequenceClassification
 
 import evaluate
 
+# Change here for extra work:
 checkpoint = "bert-base-uncased"
-subsection = "mrpc"
+# subsection = "mrpc"
 subsection = "sst2"
 
 glue_labels_per_subsection = {
@@ -23,31 +25,22 @@ glue_labels_per_subsection = {
 }
 
 
+# Metric used in these 2 functions:
 metric = evaluate.load("glue", subsection)
 def compute_metrics(eval_preds):
 	logits, labels = eval_preds
 	predictions = np.argmax(logits, axis=-1)
 	return metric.compute(predictions=predictions, references=labels)
 
-
-def glue_evaluate(trainer, glue_subsection, dataset):
-	glue_metric = evaluate.load("glue", glue_subsection)
-
+def glue_evaluate(trainer, dataset):
 	predictions = trainer.predict(dataset)
 	print(predictions.predictions.shape, predictions.label_ids.shape)
 	print("predictction metrics:  ",  predictions.metrics)
 
 	preds = np.argmax(predictions.predictions, axis=-1)
-	result = glue_metric.compute(predictions=preds, references=predictions.label_ids)
+	result = metric.compute(predictions=preds, references=predictions.label_ids)
 
 	return result
-
-
-def try_load_model_tokenizer(ckpt_path):
-	model = AutoModelForSequenceClassification.from_pretrained(checkpoint, num_labels=num_labels)
-
-	pass
-
 
 
 if __name__ == "__main__":
@@ -67,9 +60,19 @@ if __name__ == "__main__":
 
 
 	# Part 3.
-	# training_args = TrainingArguments(f'test-trainer-{subsection}')
+	val_steps = 1000
+	output_dir = f'./ckpts/test-trainer-{subsection}'
+
+	# Determine if there is already a checkpoint file.  Can also try-catch the ValueError
+	# 	https://stackoverflow.com/questions/4296138/use-wildcard-with-os-path-isfile
+	ckpt_dirs = [x for x in os.listdir(output_dir) if x.split("checkpoint-")[-1].isdigit()]
+	print("ckpt_dirs:  ",  ckpt_dirs)
+	resume_training = len(ckpt_dirs) > 0
+	if (resume_training):
+		print(f"Continuing training from:  {output_dir+'/'+sort(ckpt_dirs)[-1]}/")
+
 	training_args = TrainingArguments(
-		    output_dir=f'./test-trainer-{subsection}',          
+		    output_dir=output_dir,          
 		    								 # Directory where the model predictions and checkpoints will be written.
 		    num_train_epochs=3,              # Total number of training epochs to perform.
 		    per_device_train_batch_size=8,   # Batch size per device during training.
@@ -77,19 +80,20 @@ if __name__ == "__main__":
 		    warmup_steps=500,                # Number of warmup steps for learning rate scheduler.
 		    weight_decay=0.01,               # Strength of weight decay.
 		    logging_dir='./logs',            # Directory for storing logs.
-		    logging_steps=10,                # Log every X updates steps.
+		    logging_steps=val_steps,               # Log every X updates steps.
 		    evaluation_strategy="steps",     # Evaluation is done (and logged) every `eval_steps`.
-		    eval_steps=100,                  # Evaluation happens every 100 steps.
+		    eval_steps=val_steps,                 # Evaluation happens every 1000 steps.
 		    load_best_model_at_end=True,     # Load the best model when finished training (as measured by `metric_for_best_model`).
 		    metric_for_best_model="accuracy",# Use accuracy to evaluate the best model.
 		    learning_rate=5e-05,
+		    save_steps=val_steps,
 	)
 
 	num_labels = glue_labels_per_subsection[subsection]
-	print("num_labels:  ",  num_labels)
+	# print("num_labels:  ",  num_labels)
 	model = AutoModelForSequenceClassification.from_pretrained(checkpoint, num_labels=num_labels)
-	print("\n\nModel: ")
-	print(model)
+	# print("\n\nModel: ")
+	# print(model)
 
 	trainer = Trainer(
 	    model,
@@ -100,9 +104,9 @@ if __name__ == "__main__":
 	    tokenizer=auto_tokenizer,
 	    compute_metrics=compute_metrics,
 	)
-	trainer.train()
+	trainer.train(resume_from_checkpoint=resume_training)
 
 	# Final evaluation
-	result = glue_evaluate(trainer, subsection, tokenized_datasets["validation"])
+	result = glue_evaluate(trainer, tokenized_datasets["validation"])
 	print("Result:  ")
 	print(result)
